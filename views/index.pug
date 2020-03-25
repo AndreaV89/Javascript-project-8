@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  p
+    a.button(href="/new-book")= title
+  table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year
+    tbody
+      each book in books
+        tr
+          td
+            a(href="/book-detail/")= book.title
+          td= book.author
+          td= book.genre
+          td= book.year
+
