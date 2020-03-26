@@ -37,7 +37,40 @@ app.use((err, req, res, next) => {
             year: 2020
         });
 
-        console.log(book.toJSON());
+        const book2 = await Book.create({
+            title: 'test2',
+            author: 'test2',
+            genre: 'test2',
+            year: 2020
+        });
+
+        const book3 = await Book.create({
+            title: 'test3',
+            author: 'test3',
+            genre: 'test3',
+            year: 2020
+        });
+
+        const book4 = await Book.create({
+            title: 'test4',
+            author: 'test4',
+            genre: 'test4',
+            year: 2020
+        });
+
+        const book5 = await Book.create({
+            title: 'test5',
+            author: 'test5',
+            genre: 'test5',
+            year: 2020
+        });
+
+        const book6 = await Book.create({
+            title: 'test6',
+            author: 'test6',
+            genre: 'test6',
+            year: 2020
+        });
 
     } catch (error) {
         if (error.name === 'SequelizeValidationError') {
