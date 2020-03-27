@@ -2,7 +2,10 @@ extends layout
 
 block content
   p
-    a.button(href='books/new') Create New Book
+    a.button(href='../../books/new') Create New Book
+  form#search(action='/books/search' method='get')
+    input(type='submit' value='Search Book')
+    input(type='text', name='search', placeholder='Search ...')
   table
     thead
       tr
@@ -18,6 +21,10 @@ block content
           td= book.author
           td= book.genre
           td= book.year
+  div#pagination
+    - for (let i = 1; i < numberOfPage + 1; ++i) {
+      a.button(href='../../books/page/' + i)= i
+    - }
 
 
 

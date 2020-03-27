@@ -24,6 +24,10 @@ a.button, input[type=submit] {
   cursor: pointer;
 }
 
+form#search input[type=submit] {
+  margin-left: 0;
+}
+
 form a.button, input[type=submit] {
   margin-left: 140px;
   transition: 0.4s;
@@ -51,6 +55,14 @@ ul {
 h2 {
   border-top: 2px solid #e7e7e7;
   padding-top: 20px;
+}
+
+table {
+  margin: 20px 0;
+}
+
+div#pagination a.button {
+  margin-right: 10px;
 }
 
 th {
@@ -85,6 +97,7 @@ input {
   border-radius: 2px;
   border-color: #E7E7E7;
   transition: 0.4s;
+  font-weight: bold;
 }
 
 input[type=text] {
