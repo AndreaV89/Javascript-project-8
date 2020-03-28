@@ -30,13 +30,17 @@ router.get('/books/page/:pageNumber', asyncHandler( async (req, res) => {
     const booksNumber = await Book.count();
     const booksPerPage = 5;
     const numberOfPage = booksNumber / booksPerPage;
-    const offset = booksPerPage * (req.params.pageNumber - 1);
-    const books = await Book.findAll({offset, limit: booksPerPage});
-    if(books.length != 0) {
-        res.render("index", { books, title: "Books" , numberOfPage});
-    } else {
+    if(isNaN(req.params.pageNumber)) {
         res.render('page-not-found', { error: { message: "Page Not Found", status: 404}});
-    } 
+    } else {
+        const offset = booksPerPage * (req.params.pageNumber - 1);
+        const books = await Book.findAll({offset, limit: booksPerPage});
+        if(books.length != 0) {
+            res.render("index", { books, title: "Books" , numberOfPage});
+        } else {
+            res.render('page-not-found', { error: { message: "Page Not Found", status: 404}});
+        } 
+    }
 }))
 
 /* Search Book Route */
