@@ -2,7 +2,7 @@ extends layout
 
 block content
   p
-    a.button(href='books/new') Create New Book
+    a.button(href='../books/new') Create New Book
   form#search(action='/books/search' method='get')
     input(type='submit' value='Search Book')
     input(type='text', name='search', placeholder='Search ...')

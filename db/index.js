@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 
+/* Create a Sequelize instance and connect to the database library.db */
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: 'library.db',

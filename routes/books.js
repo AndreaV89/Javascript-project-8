@@ -4,7 +4,7 @@ const db = require('../db');
 const { Book } = db.models;
 const { Op } = db.Sequelize;
 
-// Handler for each route
+/* Handler for each route */
 function asyncHandler(cb) {
     return async(req, res, next) => {
         try {
@@ -15,19 +15,17 @@ function asyncHandler(cb) {
     }
 }
 
-
-
-/* GET home page. */
+/* GET home page - Redirect to /books */
 router.get('/', (req, res) => {
     res.redirect("/books");
 });
 
-// Book list
+/* Book list - Redirect to /page/1 */
 router.get('/books', asyncHandler( async (req, res) => {
     res.redirect("/books/page/1");
 }));
 
-// Pagination Routes
+/* Pagination Route */
 router.get('/books/page/:pageNumber', asyncHandler( async (req, res) => {
     const booksNumber = await Book.count();
     const booksPerPage = 5;
@@ -41,7 +39,7 @@ router.get('/books/page/:pageNumber', asyncHandler( async (req, res) => {
     } 
 }))
 
-// Search Book
+/* Search Book Route */
 router.get('/books/search', asyncHandler( async (req, res) => {
     const books = await Book.findAll({
         where: { 
@@ -56,12 +54,12 @@ router.get('/books/search', asyncHandler( async (req, res) => {
     res.render("search", { books, title: "Search Books" , searchTerm: req.query.search});
 }));
 
-// Create a new book
+/* Create a new book */
 router.get('/books/new', (req, res) => {
     res.render("new-book", { book: {}, title: "New Book"});
 });
 
-// POST new book
+/* POST new book */
 router.post('/books/new', asyncHandler(async (req, res) => {
     let book;
     try {
@@ -77,7 +75,7 @@ router.post('/books/new', asyncHandler(async (req, res) => {
     }
 }));
 
-// GET book detail
+/* GET book detail */
 router.get('/books/:id/',asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id);
     if(book) {
@@ -87,7 +85,7 @@ router.get('/books/:id/',asyncHandler(async (req, res) => {
     }    
 }));
 
-// Update book detail
+/* Update book detail */
 router.post('/books/:id', asyncHandler(async (req, res) => {
     let book;
     try {
@@ -109,14 +107,14 @@ router.post('/books/:id', asyncHandler(async (req, res) => {
     }
 }));
 
-// Delete book
+/* Delete book */
 router.post('/books/:id/delete', asyncHandler (async (req, res) => {
     const book = await Book.findByPk(req.params.id);
     if(book) {
         await book.destroy();
         res.redirect("/books");
     } else {
-        res.sendStatus(404);
+        res.render('page-not-found', { error: { message: "Page Not Found", status: 404}});
     }
 }));
 
